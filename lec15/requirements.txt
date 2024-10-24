@@ -1,0 +1,5 @@
+smbus
+spidev
+gspread
+oauth2client
+schedule
