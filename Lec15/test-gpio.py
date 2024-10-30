@@ -1,5 +1,4 @@
-import time
-from gpiozero import LED
-led = LED(4)
-led.on()
-time.sleep(10)
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(7, GPIO.OUT)
+GPIO.output(7, 0)
