@@ -1,5 +1,5 @@
 import time
-from gpiozero import LED
-led = LED(4)
-led.on()
+from gpiozero import DigitalOutputDevice
+relay = DigitalOutputDevice(4, active_high=False)
+relay.on()
 time.sleep(10)
