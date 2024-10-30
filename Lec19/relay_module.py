@@ -1,23 +1,22 @@
 from time import sleep
-from gpiozero import OutputDevice
+from gpiozero import DigitalOutputDevice
 import argparse
 import schedule
 
-DEFAULT_CHANNEL = 7
+DEFAULT_CHANNEL = 4
 DEFAULT_WAIT_TIME = 3
 DEFAULT_INTERVAL_TIME = 10
 
 
 class Scheduler(object):
     def __init__(self, channel, interval):
-        self._relay = OutputDevice(channel)
+        self._relay = DigitalOutputDevice(channel, active_high=False)
         self._interval = interval
 
     def power_on_and_off(self):
         self._relay.on()
         sleep(self._interval)
         self._relay.off()
-        sleep(self._interval)
 
 def main():
     parser = argparse.ArgumentParser(description="Relay Module Script")
