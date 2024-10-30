@@ -3,7 +3,7 @@ from time import sleep
 import spidev
 from gpiozero import DigitalOutputDevice
 
-DEFAULT_CHANNEL = 7
+DEFAULT_CHANNEL = 4
 
 
 class MCP300X(object):
@@ -11,7 +11,7 @@ class MCP300X(object):
         self._logger = getLogger(self.__class__.__name__)
         self._spi = spidev.SpiDev()
         self._channel = channel
-        self._relay = DigitalOutputDevice(self._channel, active_high=False, initial_value=False)
+        self._relay = DigitalOutputDevice(self._channel, active_high=False)
 
         self._logger.debug("MCP300X sensor is starting...")
 
