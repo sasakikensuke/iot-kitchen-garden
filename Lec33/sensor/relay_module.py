@@ -1,4 +1,3 @@
-# Soil Moisture Sensor
 from logging import getLogger
 from time import sleep
 import spidev
