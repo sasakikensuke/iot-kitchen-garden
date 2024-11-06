@@ -1,9 +1,9 @@
 from logging import getLogger
 from time import sleep
 import spidev
-from gpiozero import DigitalOutputDevice
+import RPi.GPIO as GPIO
 
-DEFAULT_CHANNEL = 4
+DEFAULT_CHANNEL = 7
 
 
 class relay_module(object):
@@ -11,9 +11,10 @@ class relay_module(object):
         self._logger = getLogger(self.__class__.__name__)
         self._spi = spidev.SpiDev()
         self._channel = channel
-        self._relay = DigitalOutputDevice(self._channel, active_high=False)
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BOARD)
 
-        self._logger.debug("relay_module is starting...")
+        self._logger.debug("relay_module sensor is starting...")
 
     def get_wet_level(self):
         self._spi.open(0, 0)
@@ -26,9 +27,10 @@ class relay_module(object):
     def turn_on_water(self, turn_on_time):
         print("turn on relay module {} seconds".format(turn_on_time))
 
-        self._relay.on()
+        GPIO.setup(self._channel, GPIO.OUT)
+        GPIO.output(self._channel, 0)
         sleep(turn_on_time)
         self.turn_off_water()
 
     def turn_off_water(self):
-        self._relay.off()
+        GPIO.output(self._channel, 1)
